@@ -1,5 +1,5 @@
 import Vector from "./game-engine/core/vector";
-import Game from "./game-engine/index";
+import Game, { GameState } from "./game-engine/index";
 import { degreeToRadian } from "./game-engine/utils";
 import { Ball, Wall, Paddle } from "./gameElements";
 const playBtn = document.querySelector(".play") as HTMLButtonElement
@@ -92,16 +92,20 @@ class PongGame extends Game {
 
 const pg = new PongGame()
 
-let isPlaying = false
 
 playBtn.onclick = () => {
-    if (!isPlaying) {
-        isPlaying = true
+    if (pg.state === GameState.idle || pg.state === GameState.paused) {
         pg.play()
         playBtn.innerHTML = "Pause"
         restartBtn.style.display = "inline-block"
-    } else {
-        isPlaying = false
+    }
+    else if (pg.state === GameState.over) {
+        pg.reset()
+        pg.play()
+        playBtn.innerHTML = "Pause"
+        restartBtn.style.display = "inline-block"
+    }
+    else {
         pg.pause()
         playBtn.innerHTML = "Play"
         restartBtn.style.display = ""
@@ -113,7 +117,6 @@ restartBtn.onclick = () => {
 }
 
 pg.onGameOver = function () {
-    isPlaying = false
-    playBtn.innerHTML = "Play"
+    playBtn.innerHTML = "Restart"
     restartBtn.style.display = ""
 }
