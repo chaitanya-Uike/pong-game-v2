@@ -2,7 +2,7 @@ import CollisionManager from "./helpers/collisionManager"
 import GameEntity from "./core/gameEntity"
 import KeyboardManager from "./helpers/keyboardManager"
 
-enum GameState {
+export enum GameState {
     playing,
     paused,
     over,

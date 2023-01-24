@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +9,18 @@
 .mainContainer {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr 4fr 1fr;
+  place-items: center;
+  background-color: #1e1e1e;
+}
+
+.title {
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 80px;
+  font-weight: 600;
 }
 
 .playArea {
@@ -17,12 +28,116 @@
   position: relative;
 }
 
+.midLine {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-left: 2px dashed gray;
+}
+
 .ball {
-  background-color: coral;
+  background-color: #18f2bf;
   border-radius: 50%;
 }
 
 .paddle {
-  background-color: lightgreen;
+  background-color: #cefb23;
+  border-radius: 2px;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+}
+
+.gameBtn {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: aliceblue;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  text-align: center;
+  outline: none;
+}
+
+.play {
+  width: 80px;
+  background-color: #6944ce;
+  transition: box-shadow 100ms ease-in-out;
+
+  -webkit-box-shadow: 3px 3px 0px 0px #9c81e4;
+  -moz-box-shadow: 3px 3px 0px 0px #9c81e4;
+  box-shadow: 3px 3px 0px 0px #9c81e4;
+}
+
+.play:hover {
+  -webkit-box-shadow: 4px 4px 0px 0px #9c81e4;
+  -moz-box-shadow: 4px 4px 0px 0px #9c81e4;
+  box-shadow: 4px 4px 0px 0px #9c81e4;
+}
+
+.restart {
+  display: none;
+
+  width: 100px;
+  color: #0d0d0d;
+  background-color: #cefe21;
+  transition: box-shadow 100ms ease-in-out;
+
+  -webkit-box-shadow: 3px 3px 0px 0px white;
+  -moz-box-shadow: 3px 3px 0px 0px white;
+  box-shadow: 3px 3px 0px 0px white;
+}
+
+.restart:hover {
+  -webkit-box-shadow: 4px 4px 0px 0px white;
+  -moz-box-shadow: 4px 4px 0px 0px white;
+  box-shadow: 4px 4px 0px 0px white;
+}
+
+.playAreaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.keyHintContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
+}
+
+.keyHint {
+  color: gray;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid gray;
   border-radius: 10px;
+  width: 60px;
+  aspect-ratio: 1;
+
+  -webkit-box-shadow: 0px 5px 0px 0px gray;
+  -moz-box-shadow: 0px 5px 0px 0px gray;
+  box-shadow: 0px 5px 0px 0px gray;
+}
+
+.keyHint svg {
+  width: 15px;
+  height: 15px;
+  fill: gray;
 }

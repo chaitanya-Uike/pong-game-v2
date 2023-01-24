@@ -2,10 +2,12 @@ import Vector from "./game-engine/core/vector";
 import Game from "./game-engine/index";
 import { degreeToRadian } from "./game-engine/utils";
 import { Ball, Wall, Paddle } from "./gameElements";
+const playBtn = document.querySelector(".play") as HTMLButtonElement
+const restartBtn = document.querySelector(".restart") as HTMLButtonElement
 
 const selector = ".playArea"
-const pW = 800 //playAreaWidth
-const pH = 500 //playAreaHeight
+const pW = 700 //playAreaWidth
+const pH = 400 //playAreaHeight
 
 class PongGame extends Game {
     constructor() {
@@ -13,7 +15,12 @@ class PongGame extends Game {
     }
 
     initialize() {
-        const ball = new Ball(20, 20, 10, Vector.fromMagnitudeAndTheta(3, degreeToRadian(45)))
+        const ballRadius = 5
+        // generate a random launch angle
+        const launchAngles = [45, -45, 135, -135]
+        const index = Math.floor(Math.random() * launchAngles.length)
+        const ballVelocity = Vector.fromMagnitudeAndTheta(3, degreeToRadian(launchAngles[index]))
+        const ball = new Ball(pW / 2 - 1.5, pH / 2 - ballRadius, 10, ballVelocity)
         // boundry walls
         const floor = new Wall(0, pH, pW, 5, 0)
         const rightWall = new Wall(pW - pH / 2, pH / 2, pH, 5, degreeToRadian(90))
@@ -29,6 +36,11 @@ class PongGame extends Game {
         this.addEntity(ball)
         this.addEntity([floor, rightWall, ceiling, leftWall])
         this.addEntity([leftPaddle, rightPaddle])
+
+        const midLine = document.createElement("div")
+        midLine.classList.add("midLine")
+
+        this.playAreaRef.appendChild(midLine)
 
         this.addPaddleInteractions(leftPaddle, "w", "s")
         this.addPaddleInteractions(rightPaddle, "i", "k")
@@ -80,8 +92,28 @@ class PongGame extends Game {
 
 const pg = new PongGame()
 
-pg.play()
+let isPlaying = false
+
+playBtn.onclick = () => {
+    if (!isPlaying) {
+        isPlaying = true
+        pg.play()
+        playBtn.innerHTML = "Pause"
+        restartBtn.style.display = "inline-block"
+    } else {
+        isPlaying = false
+        pg.pause()
+        playBtn.innerHTML = "Play"
+        restartBtn.style.display = ""
+    }
+}
+
+restartBtn.onclick = () => {
+    pg.reset()
+}
 
 pg.onGameOver = function () {
-    console.log("game over")
+    isPlaying = false
+    playBtn.innerHTML = "Play"
+    restartBtn.style.display = ""
 }
