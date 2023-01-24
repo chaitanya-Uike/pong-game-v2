@@ -1,6 +1,6 @@
-import Vector from "./game-engine/core/vector";
-import Game, { GameState } from "./game-engine/index";
-import { degreeToRadian } from "./game-engine/utils";
+import { Vector, Game, GameState, utils } from "./game-engine/index";
+
+
 import { Ball, Wall, Paddle } from "./gameElements";
 const playBtn = document.querySelector(".play") as HTMLButtonElement
 const restartBtn = document.querySelector(".restart") as HTMLButtonElement
@@ -19,13 +19,13 @@ class PongGame extends Game {
         // generate a random launch angle
         const launchAngles = [45, -45, 135, -135]
         const index = Math.floor(Math.random() * launchAngles.length)
-        const ballVelocity = Vector.fromMagnitudeAndTheta(3, degreeToRadian(launchAngles[index]))
+        const ballVelocity = Vector.fromMagnitudeAndTheta(3, utils.degreeToRadian(launchAngles[index]))
         const ball = new Ball(pW / 2 - 1.5, pH / 2 - ballRadius, 10, ballVelocity)
         // boundry walls
         const floor = new Wall(0, pH, pW, 5, 0)
-        const rightWall = new Wall(pW - pH / 2, pH / 2, pH, 5, degreeToRadian(90))
+        const rightWall = new Wall(pW - pH / 2, pH / 2, pH, 5, utils.degreeToRadian(90))
         const ceiling = new Wall(0, -5, pW, 5, 0)
-        const leftWall = new Wall(-pH / 2, pH / 2, pH, 5, degreeToRadian(90))
+        const leftWall = new Wall(-pH / 2, pH / 2, pH, 5, utils.degreeToRadian(90))
         // paddles
         const paddleHeight = 100
         const paddleWidth = 10

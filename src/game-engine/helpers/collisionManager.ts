@@ -3,6 +3,12 @@ import RectEntity from "../core/RectEntity";
 import SphericalEntity from "../core/sphericalEntity";
 import PhysicsEngine from "./PhysicsEngine";
 
+export interface CollisionEvent {
+    entity1: GameEntity;
+    entity2: GameEntity;
+    handler: Function
+}
+
 export default class CollisionManager {
     physicsEngine: PhysicsEngine = new PhysicsEngine()
     events: CollisionEvent[] = [];

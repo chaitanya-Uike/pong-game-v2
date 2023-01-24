@@ -10,9 +10,3 @@ interface keydownTable {
 interface keyupTable {
     [key: string]: Function[];
 }
-
-interface CollisionEvent {
-    entity1: GameEntity;
-    entity2: GameEntity;
-    handler: Function
-}
