@@ -28,7 +28,7 @@ class PhysicsEngine {
     }
 
     handleSphereRectCollision(sphere: SphericalEntity, rect: RectEntity): { sphereVelocity: Vector, rectVelocity: Vector } {
-        const surfaceNormal = this.getCollisionNormal(sphere.getCenter().x, sphere.getCenter().y, rect.position.x, rect.position.y, rect.width, rect.height, rect.rotation)
+        const surfaceNormal = this.getCollisionNormal(sphere, rect)
         const sphereVelocity = this.bounce(surfaceNormal, sphere.velocity)
 
         return { sphereVelocity, rectVelocity: this.nullVelocity }
@@ -39,7 +39,15 @@ class PhysicsEngine {
         return velocity.add(temp);
     }
 
-    getCollisionNormal(cX: number, cY: number, rX: number, rY: number, rW: number, rH: number, rA: number) {
+    getCollisionNormal(sphere: SphericalEntity, rect: RectEntity) {
+        const cX = sphere.getCenter().x
+        const cY = sphere.getCenter().y
+        const rX = rect.position.x
+        const rY = rect.position.y
+        const rW = rect.width
+        const rH = rect.height
+        const rA = rect.rotation
+
         const eX = rW / 2;
         const eY = rH / 2;
 
