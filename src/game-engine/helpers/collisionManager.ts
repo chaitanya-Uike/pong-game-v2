@@ -122,10 +122,10 @@ export default class CollisionManager {
         const rcY = rect.getCenter().y
 
         // Rotate circle's center point back
-        const unrotatedCircleX = Math.cos(rect.rotation) * (cx - rcX) -
-            Math.sin(rect.rotation) * (cy - rcY) + rcX;
-        const unrotatedCircleY = Math.sin(rect.rotation) * (cx - rcX) +
-            Math.cos(rect.rotation) * (cy - rcY) + rcY;
+        const unrotatedCircleX = Math.cos(-rect.rotation) * (cx - rcX) -
+            Math.sin(-rect.rotation) * (cy - rcY) + rcX;
+        const unrotatedCircleY = Math.sin(-rect.rotation) * (cx - rcX) +
+            Math.cos(-rect.rotation) * (cy - rcY) + rcY;
 
         // Closest point in the rectangle to the center of circle rotated backwards(unrotated)
         let closestX, closestY;
